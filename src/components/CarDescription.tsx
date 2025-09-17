@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../style/Description.css";
+import "../style/CarDescription.css";
 
 export default function Description({
   description,
@@ -10,13 +10,14 @@ export default function Description({
 }) {
   const [className, setClassName] = useState("regular");
   useEffect(() => {
-    if (score > 50) {
+    if (score > 70) {
       setClassName("dangerous");
-    } else if (score > 25) {
+    } else if (score > 50) {
       setClassName("unsafe");
-      console.log(className);
+    } else {
+      setClassName("regular");
     }
-  }, []);
+  }, [score]);
   return (
     <section id="description" className={className}>
       <p id="descriptionText">{description} : תיאור</p>

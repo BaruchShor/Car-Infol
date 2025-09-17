@@ -17,7 +17,7 @@ export default function Details({
           <li className="liInfo">{color} : צבע נוכחי</li>
           <li className="liInfo">{number} : לוחית רישוי</li>
           <li className="liInfo">
-            האם ירד מהכביש : {is_off_road ? "כן" : "לא"}
+            האם ירד מהכביש : {is_off_road === "True" ? "כן" : "לא"}
           </li>
           <li className="liInfo">{score} : ציון מסוכנות</li>
           <li className="liInfo">{original_details.model} : דגם מקורי</li>

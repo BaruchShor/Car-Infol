@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import type ICarInfo from "../interfaces/ICarInfo";
 import CarImage from "../components/CarPage";
 import Details from "../components/Detalils";
@@ -6,13 +6,13 @@ import "../style/HomePage.css";
 
 export default function HomePage() {
   const [carData, setCarData] = useState<ICarInfo>();
-  const oneRender = useRef(false);
+  const [shouldRefresh, setShouldRefresh] = useState(true);
 
   useEffect(() => {
+    if (!shouldRefresh) return;
+
     const getCarData = async () => {
       try {
-        if (oneRender.current === true) return;
-        oneRender.current = true;
         const respons = await fetch("http://localhost:8081", {
           method: "GET",
         });
@@ -21,7 +21,21 @@ export default function HomePage() {
       } catch (err) {}
     };
     getCarData();
-  }, []);
+
+    const interval = setInterval(() => {
+      getCarData();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [shouldRefresh]);
+
+  useEffect(() => {
+    console.log(carData?.score);
+    if (carData && carData.score > 70) {
+      console.log("fuck");
+      setShouldRefresh(false);
+    }
+  }, [carData]);
   return (
     <>
       <article id="homePage">
@@ -32,6 +46,9 @@ export default function HomePage() {
             description={carData?.Description}
             score={carData.score}
           />
+        )}
+        {carData && carData.score > 70 && (
+          <button id="continu" onClick={() => setShouldRefresh(true)}>{"אישור המשך בדיקה"}</button>
         )}
       </article>
     </>
