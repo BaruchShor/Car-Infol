@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../style/CarDescription.css";
 
-export default function Description({
+export default function CarDescription({
   description,
   score,
 }: {

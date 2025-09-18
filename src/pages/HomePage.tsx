@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import type ICarInfo from "../interfaces/ICarInfo";
-import CarImage from "../components/CarPage";
 import Details from "../components/Detalils";
 import "../style/HomePage.css";
+import CarPage from "../components/CarPage";
 
 export default function HomePage() {
   const [carData, setCarData] = useState<ICarInfo>();
@@ -36,19 +36,22 @@ export default function HomePage() {
       setShouldRefresh(false);
     }
   }, [carData]);
+
+  const continueSowCar = (): void => {
+    setShouldRefresh(true);
+  };
   return (
     <>
       <article id="homePage">
         {carData && <Details {...(carData as ICarInfo)} />}
         {carData && (
-          <CarImage
+          <CarPage
             image={carData?.image_id}
             description={carData?.Description}
             score={carData.score}
+            continueSowCar={continueSowCar}
+            isDangerous={carData.score > 70}
           />
-        )}
-        {carData && carData.score > 70 && (
-          <button id="continu" onClick={() => setShouldRefresh(true)}>{"אישור המשך בדיקה"}</button>
         )}
       </article>
     </>
