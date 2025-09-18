@@ -31,8 +31,7 @@ export default function HomePage() {
 
   useEffect(() => {
     console.log(carData?.score);
-    if (carData && carData.score > 70) {
-      console.log("fuck");
+    if (carData && carData.score > 40) {
       setShouldRefresh(false);
     }
   }, [carData]);
@@ -47,10 +46,10 @@ export default function HomePage() {
         {carData && (
           <CarPage
             image={carData?.image_id}
-            description={carData?.Description}
+            description={carData?.description}
             score={carData.score}
             continueSowCar={continueSowCar}
-            isDangerous={carData.score > 70}
+            isDangerous={carData.score > 40}
           />
         )}
       </article>

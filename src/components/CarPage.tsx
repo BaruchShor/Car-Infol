@@ -21,7 +21,7 @@ export default function CarPage({
   useEffect(() => {
     const getCarData = async () => {
       try {
-        const respons = await fetch(`http://localhost:8081/file/${image}`, {
+        const respons = await fetch(`http://localhost:8001/image/${image}`, {
           method: "GET",
         });
         const blob = await respons.blob();
@@ -32,7 +32,7 @@ export default function CarPage({
       }
     };
     getCarData();
-  }, []);
+  }, [image]);
   return (
     <>
       <article id="carPage">

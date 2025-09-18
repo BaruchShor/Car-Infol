@@ -9,5 +9,5 @@ export default interface ICarInfo {
   original_details: IOrginalInfo;
   is_off_road: string;
   score: number;
-  Description: string;
+  description: string;
 }

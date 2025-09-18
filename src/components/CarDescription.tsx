@@ -10,9 +10,9 @@ export default function CarDescription({
 }) {
   const [className, setClassName] = useState("regular");
   useEffect(() => {
-    if (score > 70) {
+    if (score > 40) {
       setClassName("dangerous");
-    } else if (score > 50) {
+    } else if (score > 20) {
       setClassName("unsafe");
     } else {
       setClassName("regular");
@@ -20,7 +20,7 @@ export default function CarDescription({
   }, [score]);
   return (
     <section id="description" className={className}>
-      <p id="descriptionText">{description} : תיאור</p>
+      <p id="descriptionText">תיאור : {description}</p>
     </section>
   );
 }
